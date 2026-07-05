@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=JetBrains+Mono:wght@300;400;500;700&display=swap');
+@import "tailwindcss";
+
+/* ─── Design tokens ──────────────────────────────────────────────────────── */
+@theme {
+  --font-sans:  "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Newsreader", ui-serif, Georgia, serif;
+  --font-mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* OFF-WHITE LIGHT THEME — primary surfaces */
+  --color-bg-deep:    #FAF9F6;   /* warm off-white — page background */
+  --color-bg-darker:  #F0EDE4;   /* slightly darker card surface */
+  --color-bg-dark:    #E8E4D9;   /* input backgrounds, sub-surfaces */
+
+  /* Accent — Nigerian gold */
+  --color-brand-gold:       #8B6914;   /* dark gold for text on light bg */
+  --color-brand-gold-light: #C8A84B;   /* mid gold for borders, icons */
+  --color-brand-gold-bg:    #FDF5E0;   /* gold tint backgrounds */
+
+  /* Active / success green */
+  --color-brand-green:  #1A6B3C;   /* deep forest green — primary active state */
+  --color-brand-cyan:   #1A6B3C;   /* alias of brand-green — kept for component compatibility */
+  --color-brand-purple: #2D6B2D;   /* forest green — secondary active */
+
+  /* Text scale — dark on light */
+  --color-text-sand:       #1A1A14;   /* near-black primary text */
+  --color-text-sand-dim:   #4A4A3A;   /* secondary text */
+  --color-text-sand-muted: #8A8A72;   /* muted / placeholder */
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--color-bg-deep);
+  color: var(--color-text-sand);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Selection */
+::selection {
+  background: rgba(200, 168, 75, 0.25);
+  color: var(--color-text-sand);
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-bg-deeper); }
+::-webkit-scrollbar-thumb { background: var(--color-text-sand-muted); border-radius: 2px; }
+.scrollbar-thin::-webkit-scrollbar { width: 3px; }
+
+/* ─── Subtle paper texture ───────────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Grid overlay — gold-tinted on off-white ────────────────────────────── */
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(139, 105, 20, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 105, 20, 0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* ─── Component tokens ───────────────────────────────────────────────────── */
+/* Chip / tag */
+.chip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border: 1px solid rgba(139, 105, 20, 0.2);
+  border-radius: 2px;
+  color: var(--color-text-sand-muted);
+  background: rgba(139, 105, 20, 0.05);
+}
+
+/* Eyebrow label */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-brand-gold);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--color-brand-gold-light);
+  opacity: 0.6;
+}
+
+/* Dark cards — used for inverting sections on light bg */
+.card-dark {
+  background: #1A1A14;
+  color: var(--color-bg-deep);
+  border-color: transparent;
+}
+.card-dark .text-muted { color: rgba(250, 249, 246, 0.55); }
+
+/* ─── Animations ─────────────────────────────────────────────────────────── */
+/* Radio wave */
+@keyframes wave-expand {
+  0%   { transform: translate(-50%, -50%) scale(0.2); opacity: 0.6; }
+  100% { transform: translate(-50%, -50%) scale(1);   opacity: 0; }
+}
+.animate-wave-0 { animation: wave-expand 4s ease-out infinite; }
+.animate-wave-1 { animation: wave-expand 4s ease-out infinite; animation-delay: 0.8s; }
+.animate-wave-2 { animation: wave-expand 4s ease-out infinite; animation-delay: 1.6s; }
+.animate-wave-3 { animation: wave-expand 4s ease-out infinite; animation-delay: 2.4s; }
+.animate-wave-4 { animation: wave-expand 4s ease-out infinite; animation-delay: 3.2s; }
+
+/* Cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.animate-blink { animation: blink 1s step-end infinite; }
+
+/* Status dot */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.35; transform: scale(0.65); }
+}
+.animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+/* Fade-up entrance */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fade-in 0.35s ease forwards; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
