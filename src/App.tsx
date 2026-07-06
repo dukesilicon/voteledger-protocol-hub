@@ -430,7 +430,7 @@ export default function App() {
       )}
 
       {/* ── TAB INDICATOR BAR ───────────────────────────────────────────── */}
-      <div className="sticky top-16 z-40 bg-bg-deep/98 backdrop-blur-sm border-b border-brand-gold-light/20 shadow-sm" role="navigation" aria-label="Section navigation">
+      <div className="lg:hidden sticky top-16 z-40 bg-bg-deep/98 backdrop-blur-sm border-b border-brand-gold-light/20 shadow-sm" role="navigation" aria-label="Section navigation">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="hidden sm:flex items-center gap-1 overflow-x-auto py-2 scrollbar-none">
             <span className="text-[9px] font-mono text-text-sand-muted uppercase tracking-widest mr-2 shrink-0">Section:</span>
